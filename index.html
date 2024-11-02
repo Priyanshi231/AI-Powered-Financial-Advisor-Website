@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Advisor</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            display: inline-block;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .chart {
+            background-color: #ddd;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a onclick="showSection('landing')">Home</a>
+        <a onclick="showSection('login')">Login</a>
+        <a onclick="showSection('dashboard')">Dashboard</a>
+        <a onclick="showSection('dataInput')">Data Input</a>
+        <a onclick="showSection('recommendations')">Recommendations</a>
+    </nav>
+
+    <!-- Landing Page -->
+    <section id="landing" class="container">
+        <h1>Welcome to Your AI-Powered Financial Advisor</h1>
+        <p>Get personalized financial insights and plan your future better.</p>
+        <span class="button" onclick="showSection('login')">Get Started</span>
+    </section>
+
+    <!-- Login Page -->
+    <section id="login" class="container hidden">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit" class="button">Login</button>
+        </form>
+        <p>Don’t have an account? <span class="button" onclick="showSection('landing')">Sign Up</span></p>
+    </section>
+
+    <!-- Dashboard Page -->
+    <section id="dashboard" class="container hidden">
+        <h2>Your Financial Overview</h2>
+        <div>
+            <p><strong>Total Balance:</strong> $5000</p>
+            <p><strong>Monthly Income:</strong> $3000</p>
+            <p><strong>Monthly Expenses:</strong> $2000</p>
+        </div>
+        <div class="chart">
+            <h3>Expense Distribution</h3>
+            <!-- Placeholder for chart -->
+            <p>(Chart would go here)</p>
+        </div>
+    </section>
+
+    <!-- Data Input Form -->
+    <section id="dataInput" class="container hidden">
+        <h2>Enter Your Financial Data</h2>
+        <form id="dataInputForm">
+            <label for="income">Monthly Income:</label>
+            <input type="number" id="income" required>
+
+            <label for="expenses">Monthly Expenses:</label>
+            <input type="number" id="expenses" required>
+
+            <label for="goals">Savings Goal:</label>
+            <input type="number" id="goals" required>
+
+            <button type="submit" class="button">Submit</button>
+        </form>
+    </section>
+
+    <!-- Recommendations Page -->
+    <section id="recommendations" class="container hidden">
+        <h2>Personalized Financial Recommendations</h2>
+        <ul>
+            <li>Consider reducing your entertainment expenses by 10%.</li>
+            <li>Increase your savings goal to maximize returns.</li>
+            <li>Explore investment options for long-term growth.</li>
+        </ul>
+    </section>
+
+    <!-- JavaScript for Navigation and Form Handling -->
+    <script>
+        // Function to show specific section and hide others
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            alert(`Logged in with Email: ${email}`);
+            showSection('dashboard');
+        });
+
+        // Handle data input form submission
+        document.getElementById('dataInputForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const income = document.getElementById('income').value;
+            const expenses = document.getElementById('expenses').value;
+            const goals = document.getElementById('goals').value;
+            alert(`Income: $${income}, Expenses: $${expenses}, Goals: $${goals}`);
+            showSection('recommendations');
+        });
+    </script>
+
+</body>
+</html>
